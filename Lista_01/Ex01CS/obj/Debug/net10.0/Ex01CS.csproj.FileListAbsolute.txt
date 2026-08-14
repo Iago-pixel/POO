@@ -1,0 +1,15 @@
+/workspaces/POO/Lista_01/Ex01CS/bin/Debug/net10.0/Ex01CS
+/workspaces/POO/Lista_01/Ex01CS/bin/Debug/net10.0/Ex01CS.deps.json
+/workspaces/POO/Lista_01/Ex01CS/bin/Debug/net10.0/Ex01CS.runtimeconfig.json
+/workspaces/POO/Lista_01/Ex01CS/bin/Debug/net10.0/Ex01CS.dll
+/workspaces/POO/Lista_01/Ex01CS/bin/Debug/net10.0/Ex01CS.pdb
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.AssemblyInfoInputs.cache
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.AssemblyInfo.cs
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.csproj.CoreCompileInputs.cache
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.sourcelink.json
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.dll
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/refint/Ex01CS.dll
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.pdb
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/Ex01CS.genruntimeconfig.cache
+/workspaces/POO/Lista_01/Ex01CS/obj/Debug/net10.0/ref/Ex01CS.dll
