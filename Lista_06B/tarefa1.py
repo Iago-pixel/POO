@@ -49,7 +49,7 @@ class Cliente:
             raise ValueError("O telefone é obrigatório!")
         self.__fone = f
 
-    def to_string(self):
+    def __str__(self):
         return f"id {self.id} - {self.nome} - {self.email} - tel. {self.fone}"
 
     def to_json(self):
@@ -119,7 +119,7 @@ class Venda:
             raise ValueError("O valor do id do cliente deve ser maior que 0!")
         self.__id_cliente = id_cl
 
-    def to_string(self):
+    def __str__(self):
         id = self.id
         data = self.data.strftime("%d/%m/%Y")
         carrinho = "Está no carrinho" if self.carrinho else "Não está no carrinho"
@@ -130,8 +130,8 @@ class Venda:
     def to_json(self):
         return {
             "id": self.id,
-            "data": self.data,
-            "carrinho": self.carrinho,
+            "data": self.data.strftime("%d/%m/%Y"),
+            "carrinho": 1 if self.carrinho else 0,
             "total": self.total,
             "id_cliente": self.id_cliente
         }
@@ -139,8 +139,8 @@ class Venda:
     @classmethod
     def from_json(cls, dic):
         venda = cls(dic["id"], dic["id_cliente"])
-        venda.data = dic["data"]
-        venda.carrinho = dic["carrinho"]
+        venda.data = dt.datetime.strptime(dic["data"], "%d/%m/%Y")
+        venda.carrinho = bool(dic["carrinho"])
         venda.total = dic["total"]
         return venda
 
@@ -170,7 +170,7 @@ class Categoria:
             raise ValueError("A descrição é obrigatória!")
         self.__descricao = d
 
-    def to_string(self):
+    def __str__(self):
         return f"id {self.id} - {self.descricao}"
 
     def to_json(self):
@@ -242,7 +242,7 @@ class Produto:
             raise ValueError("O valor do id_categoria deve ser maior que 0!")
         self.__id_categoria = id_cat
 
-    def to_string(self):
+    def __str__(self):
         return f"id {self.id} - {self.descricao} - R$ {self.preco:.2f} - N° no estoque: {self.estoque} - id da categoria {self.id_categoria}"
 
     def to_json(self):
@@ -317,7 +317,7 @@ class VendaItem:
             raise ValueError("O valor do id do produto deve ser maior que 0!")
         self.__id_produto = id_pr
 
-    def to_string(self):
+    def __str__(self):
         return f"id {self.id} - quantidade: {self.qtd} - R$ {self.preco:.2f} - id_venda {self.id_venda} - id_produto {self.id_produto}"
 
     def to_json(self):
