@@ -3,255 +3,275 @@ from tarefa1 import Cliente, Venda, Categoria, Produto, VendaItem
 
 
 class ClienteDAO:
-    arquivo = "cliente.json"
-    objetos = []
+    def __init__(self):
+        self.__arquivo = "cliente.json"
+        self.__objetos = []
 
-    @classmethod
-    def inserir(cls, obj):
-        cls.objetos.append(obj)
+    def inserir(self, obj):
+        self.__abrir()
+        id = 0
+        if len(self.__objetos) != 0:
+            id = max(self.__objetos, key = lambda x : x.id).id
+        obj.id = id + 1    
+        self.__objetos.append(obj)
+        self.__salvar()
 
-    @classmethod
-    def listar(cls):
-        return cls.objetos
+    def listar(self):
+        self.__abrir()
+        return self.__objetos
 
-    @classmethod
-    def listar_id(cls, id):
-        for obj in cls.objetos:
+    def listar_id(self, id):
+        self.__abrir()
+        for obj in self.__objetos:
             if obj.id == id:
                 return obj
-        raise IndexError("Cliente não encontrado!")
+        return None
 
-    @classmethod
-    def atualizar(cls, novo_cliente):
-        for i, cliente_atual in enumerate(cls.objetos):
+    def atualizar(self, novo_cliente):
+        self.__abrir()
+        for i, cliente_atual in enumerate(self.__objetos):
             if novo_cliente.id == cliente_atual.id:
-                cls.objetos[i] = novo_cliente
+                self.__objetos[i] = novo_cliente
+                self.__salvar()
                 return
-        raise IndexError("Cliente não encontrado!")
 
-    @classmethod
-    def excluir(cls, id):
-        for i, cliente_atual in enumerate(cls.objetos):
+    def excluir(self, id):
+        self.__abrir()
+        for i, cliente_atual in enumerate(self.__objetos):
             if cliente_atual.id == id:
-                cls.objetos.pop(i)
+                self.__objetos.pop(i)
+                self.__salvar()
                 return
-        raise IndexError("Cliente não encontrado!")
 
-    @classmethod
-    def abrir(cls):
-        cls.objetos = []
-        with open(cls.arquivo, mode="r") as arquivo:
+    def __abrir(self):
+        self.__objetos = []
+        with open(self.__arquivo, mode="r") as arquivo:
             clientes_json = json.load(arquivo)
             for obj in clientes_json:
                 c = Cliente.from_json(obj)
-                cls.objetos.append(c)
+                self.__objetos.append(c)
 
-    @classmethod
-    def salvar(cls):
-        clientes_json = [obj.to_json() for obj in cls.objetos]
-        with open(cls.arquivo, mode="w") as arquivo:
-            json.dump(clientes_json, arquivo)
+    def __salvar(self):
+        clientes_json = [obj.to_json() for obj in self.__objetos]
+        with open(self.__arquivo, mode="w") as arquivo:
+            json.dump(clientes_json, arquivo, indent = 2)
 
 
 class VendaDAO:
-    arquivo = "venda.json"
-    objetos = []
+    def __init__(self):
+        self.__arquivo = "venda.json"
+        self.__objetos = []
 
-    @classmethod
-    def inserir(cls, obj):
-        cls.objetos.append(obj)
+    def inserir(self, obj):
+        self.__abrir()
+        id = 0
+        if len(self.__objetos) != 0:
+            id = max(self.__objetos, key = lambda x : x.id).id
+        obj.id = id + 1
+        self.__objetos.append(obj)
+        self.__salvar()
 
-    @classmethod
-    def listar(cls):
-        return cls.objetos
+    def listar(self):
+        self.__abrir()
+        return self.__objetos
 
-    @classmethod
-    def listar_id(cls, id):
-        for obj in cls.objetos:
+    def listar_id(self, id):
+        self.__abrir()
+        for obj in self.__objetos:
             if obj.id == id:
                 return obj
-        raise IndexError("Venda não encontrado!")
+        return None
 
-    @classmethod
-    def atualizar(cls, nova_venda):
-        for i, venda_atual in enumerate(cls.objetos):
+    def atualizar(self, nova_venda):
+        self.__abrir()
+        for i, venda_atual in enumerate(self.__objetos):
             if nova_venda.id == venda_atual.id:
-                cls.objetos[i] = nova_venda
+                self.__objetos[i] = nova_venda
+                self.__salvar()
                 return
-        raise IndexError("Venda não encontrado!")
 
-    @classmethod
-    def excluir(cls, id):
-        for i, venda_atual in enumerate(cls.objetos):
+    def excluir(self, id):
+        self.__abrir()
+        for i, venda_atual in enumerate(self.__objetos):
             if venda_atual.id == id:
-                cls.objetos.pop(i)
+                self.__objetos.pop(i)
+                self.__salvar()
                 return
-        raise IndexError("Venda não encontrado!")
 
-    @classmethod
-    def abrir(cls):
-        cls.objetos = []
-        with open(cls.arquivo, mode="r") as arquivo:
+    def __abrir(self):
+        self.__objetos = []
+        with open(self.__arquivo, mode="r") as arquivo:
             vendas_json = json.load(arquivo)
             for obj in vendas_json:
                 v = Venda.from_json(obj)
-                cls.objetos.append(v)
+                self.__objetos.append(v)
 
-    @classmethod
-    def salvar(cls):
-        vendas_json = [obj.to_json() for obj in cls.objetos]
-        with open(cls.arquivo, mode="w") as arquivo:
-            json.dump(vendas_json, arquivo)
+    def __salvar(self):
+        vendas_json = [obj.to_json() for obj in self.__objetos]
+        with open(self.__arquivo, mode="w") as arquivo:
+            json.dump(vendas_json, arquivo, indent = 2)
 
 
 class CategoriaDAO:
-    arquivo = "categoria.json"
-    objetos = []
+    def __init__(self):
+        self.__arquivo = "categoria.json"
+        self.__objetos = []
 
-    @classmethod
-    def inserir(cls, obj):
-        cls.objetos.append(obj)
+    def inserir(self, obj):
+        self.__abrir()
+        id = 0
+        if len(self.__objetos) != 0:
+            id = max(self.__objetos, key = lambda x : x.id).id
+        obj.id = id + 1    
+        self.__objetos.append(obj)
+        self.__salvar()
 
-    @classmethod
-    def listar(cls):
-        return cls.objetos
+    def listar(self):
+        self.__abrir()
+        return self.__objetos
 
-    @classmethod
-    def listar_id(cls, id):
-        for obj in cls.objetos:
+    def listar_id(self, id):
+        self.__abrir()
+        for obj in self.__objetos:
             if obj.id == id:
                 return obj
-        raise IndexError("Categoria não encontrado!")
+        return None
 
-    @classmethod
-    def atualizar(cls, nova_categoria):
-        for i, categoria_atual in enumerate(cls.objetos):
+    def atualizar(self, nova_categoria):
+        self.__abrir()
+        for i, categoria_atual in enumerate(self.__objetos):
             if nova_categoria.id == categoria_atual.id:
-                cls.objetos[i] = nova_categoria
+                self.__objetos[i] = nova_categoria
+                self.__salvar()
                 return
-        raise IndexError("Categoria não encontrado!")
 
-    @classmethod
-    def excluir(cls, id):
-        for i, categoria_atual in enumerate(cls.objetos):
+    def excluir(self, id):
+        self.__abrir()
+        for i, categoria_atual in enumerate(self.__objetos):
             if categoria_atual.id == id:
-                cls.objetos.pop(i)
+                self.__objetos.pop(i)
+                self.__salvar()
                 return
-        raise IndexError("Categoria não encontrado!")
 
-    @classmethod
-    def abrir(cls):
-        cls.objetos = []
-        with open(cls.arquivo, mode="r") as arquivo:
+    def __abrir(self):
+        self.__objetos = []
+        with open(self.__arquivo, mode="r") as arquivo:
             categorias_json = json.load(arquivo)
             for obj in categorias_json:
                 c = Categoria.from_json(obj)
-                cls.objetos.append(c)
+                self.__objetos.append(c)
 
-    @classmethod
-    def salvar(cls):
-        categorias_json = [obj.to_json() for obj in cls.objetos]
-        with open(cls.arquivo, mode="w") as arquivo:
-            json.dump(categorias_json, arquivo)
+    def __salvar(self):
+        categorias_json = [obj.to_json() for obj in self.__objetos]
+        with open(self.__arquivo, mode="w") as arquivo:
+            json.dump(categorias_json, arquivo, indent = 2)
 
 
 class ProdutoDAO:
-    arquivo = "produto.json"
-    objetos = []
+    def __init__(self):
+        self.__arquivo = "produto.json"
+        self.__objetos = []
 
-    @classmethod
-    def inserir(cls, obj):
-        cls.objetos.append(obj)
+    def inserir(self, obj):
+        self.__abrir()
+        id = 0
+        if len(self.__objetos) != 0:
+            id = max(self.__objetos, key = lambda x : x.id).id
+        obj.id = id + 1    
+        self.__objetos.append(obj)
+        self.__salvar()
 
-    @classmethod
-    def listar(cls):
-        return cls.objetos
+    def listar(self):
+        self.__abrir()
+        return self.__objetos
 
-    @classmethod
-    def listar_id(cls, id):
-        for obj in cls.objetos:
+    def listar_id(self, id):
+        self.__abrir()
+        for obj in self.__objetos:
             if obj.id == id:
                 return obj
-        raise IndexError("Produto não encontrado!")
+        return None
 
-    @classmethod
-    def atualizar(cls, novo_produto):
-        for i, produto_atual in enumerate(cls.objetos):
+    def atualizar(self, novo_produto):
+        self.__abrir()
+        for i, produto_atual in enumerate(self.__objetos):
             if novo_produto.id == produto_atual.id:
-                cls.objetos[i] = novo_produto
+                self.__objetos[i] = novo_produto
+                self.__salvar()
                 return
-        raise IndexError("Produto não encontrado!")
 
-    @classmethod
-    def excluir(cls, id):
-        for i, produto_atual in enumerate(cls.objetos):
+    def excluir(self, id):
+        self.__abrir()
+        for i, produto_atual in enumerate(self.__objetos):
             if produto_atual.id == id:
-                cls.objetos.pop(i)
+                self.__objetos.pop(i)
+                self.__salvar()
                 return
-        raise IndexError("Produto não encontrado!")
 
-    @classmethod
-    def abrir(cls):
-        cls.objetos = []
-        with open(cls.arquivo, mode="r") as arquivo:
+    def __abrir(self):
+        self.__objetos = []
+        with open(self.__arquivo, mode="r") as arquivo:
             produtos_json = json.load(arquivo)
             for obj in produtos_json:
                 p = Produto.from_json(obj)
-                cls.objetos.append(p)
+                self.__objetos.append(p)
 
-    @classmethod
-    def salvar(cls):
-        produtos_json = [obj.to_json() for obj in cls.objetos]
-        with open(cls.arquivo, mode="w") as arquivo:
-            json.dump(produtos_json, arquivo)
+    def __salvar(self):
+        produtos_json = [obj.to_json() for obj in self.__objetos]
+        with open(self.__arquivo, mode="w") as arquivo:
+            json.dump(produtos_json, arquivo, indent = 2)
 
 
 class VendaItemDAO:
-    arquivo = "venda_item.json"
-    objetos = []
+    def __init__(self):
+        self.__arquivo = "venda_item.json"
+        self.__objetos = []
 
-    @classmethod
-    def inserir(cls, obj):
-        cls.objetos.append(obj)
+    def inserir(self, obj):
+        self.__abrir()
+        id = 0
+        if len(self.__objetos) != 0:
+            id = max(self.__objetos, key = lambda x : x.id).id
+        obj.id = id + 1
+        self.__objetos.append(obj)
+        self.__salvar()
 
-    @classmethod
-    def listar(cls):
-        return cls.objetos
+    def listar(self):
+        self.__abrir()
+        return self.__objetos
 
-    @classmethod
-    def listar_id(cls, id):
-        for obj in cls.objetos:
+    def listar_id(self, id):
+        self.__abrir()
+        for obj in self.__objetos:
             if obj.id == id:
                 return obj
-        raise IndexError("Item da venda não encontrado!")
+        return None
 
-    @classmethod
-    def atualizar(cls, novo_venda_item):
-        for i, venda_item_atual in enumerate(cls.objetos):
+    def atualizar(self, novo_venda_item):
+        self.__abrir()
+        for i, venda_item_atual in enumerate(self.__objetos):
             if novo_venda_item.id == venda_item_atual.id:
-                cls.objetos[i] = novo_venda_item
+                self.__objetos[i] = novo_venda_item
+                self.__salvar()
                 return
-        raise IndexError("Item da venda não encontrado!")
 
-    @classmethod
-    def excluir(cls, id):
-        for i, venda_item_atual in enumerate(cls.objetos):
+    def excluir(self, id):
+        self.__abrir()
+        for i, venda_item_atual in enumerate(self.__objetos):
             if venda_item_atual.id == id:
-                cls.objetos.pop(i)
+                self.__objetos.pop(i)
+                self.__salvar()
                 return
-        raise IndexError("Item da venda não encontrado!")
 
-    @classmethod
-    def abrir(cls):
-        cls.objetos = []
-        with open(cls.arquivo, mode="r") as arquivo:
+    def __abrir(self):
+        self.__objetos = []
+        with open(self.__arquivo, mode="r") as arquivo:
             venda_items_json = json.load(arquivo)
             for obj in venda_items_json:
                 vi = VendaItem.from_json(obj)
-                cls.objetos.append(vi)
+                self.__objetos.append(vi)
 
-    @classmethod
-    def salvar(cls):
-        venda_items_json = [obj.to_json() for obj in cls.objetos]
-        with open(cls.arquivo, mode="w") as arquivo:
-            json.dump(venda_items_json, arquivo)
+    def __salvar(self):
+        venda_items_json = [obj.to_json() for obj in self.__objetos]
+        with open(self.__arquivo, mode="w") as arquivo:
+            json.dump(venda_items_json, arquivo, indent = 2)
