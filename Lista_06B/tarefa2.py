@@ -177,7 +177,7 @@ class ProdutoDAO:
         id = 0
         if len(self.__objetos) != 0:
             id = max(self.__objetos, key = lambda x : x.id).id
-        obj.id = id + 1    
+        obj.id = id + 1
         self.__objetos.append(obj)
         self.__salvar()
 
